@@ -1,0 +1,14 @@
+{
+    "name": "LoopingBee.TikGames",
+    "rootNamespace": "LoopingBee.TikGames",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,7 @@
+{
+    "name": "com.loopingbee.tikgames",
+    "version": "0.1.0",
+    "author": "José Luis García",
+    "displayName": "TikGames Shared Library",
+    "description": "A shared code library for the TikGames platform"
+}
