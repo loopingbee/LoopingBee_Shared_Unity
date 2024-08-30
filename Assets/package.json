@@ -3,5 +3,6 @@
     "version": "0.1.0",
     "author": "José Luis García",
     "displayName": "Internal Shared Library",
-    "description": "A shared code library for the platform"
+    "description": "A shared code library for the platform",
+    "hideInEditor": false
 }
