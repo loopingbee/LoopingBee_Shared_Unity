@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace LoopingBee.TikGames
+namespace LoopingBee.Shared
 {
-    public class TikGamesInput : MonoBehaviour
+    public class LoopingBeeInput : MonoBehaviour
     {
-        static TikGamesInput _instance;
-        public static TikGamesInput Instance => _instance;
+        static LoopingBeeInput _instance;
+        public static LoopingBeeInput Instance => _instance;
 
         public event Action<string> OnDataReceived;
 

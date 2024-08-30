@@ -1,6 +1,6 @@
 {
-    "name": "LoopingBee.TikGames",
-    "rootNamespace": "LoopingBee.TikGames",
+    "name": "LoopingBee.Shared",
+    "rootNamespace": "LoopingBee.Shared",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6022707891829299609}
   - component: {fileID: 2375334522571442222}
   m_Layer: 0
-  m_Name: TikGamesInput
+  m_Name: LoopingBeeInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
