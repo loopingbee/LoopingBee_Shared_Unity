@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,10 +10,16 @@ namespace LoopingBee.Shared
         public static void SetupLoopingBee()
         {
             Debug.Log("Setting up LoopingBee");
-            var originPath = Application.dataPath + "/../Library/PackageCache/com.loopingbee.shared/.templates";
+            var originPath = Application.dataPath + "/../Library/PackageCache/com.loopingbee.shared/.template";
             Debug.Log("Origin path: " + originPath);
-            var targetPath = Application.dataPath;
+            var targetPath = Application.dataPath + "/WebGLTemplates";
             Debug.Log("Target path: " + targetPath);
+
+            if (!Directory.Exists(targetPath))
+            {
+                Debug.Log("Creating target directory");
+                Directory.CreateDirectory(targetPath);
+            }
 
             // Use bash to create a sym link
             var process = new System.Diagnostics.Process();
@@ -27,7 +34,7 @@ namespace LoopingBee.Shared
             // Rename the symlink to the correct name "WebGLTemplate"
             process = new System.Diagnostics.Process();
             process.StartInfo.FileName = "/bin/bash";
-            process.StartInfo.Arguments = $"-c \"mv {targetPath}/.templates {targetPath}/WebGLTemplates\"";
+            process.StartInfo.Arguments = $"-c \"mv {targetPath}/.template {targetPath}/Looping\\ Bee\"";
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
 
