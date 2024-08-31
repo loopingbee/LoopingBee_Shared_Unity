@@ -27,12 +27,15 @@ namespace LoopingBee.Shared
             // Rename the symlink to the correct name "WebGLTemplate"
             process = new System.Diagnostics.Process();
             process.StartInfo.FileName = "/bin/bash";
-            process.StartInfo.Arguments = $"-c \"mv {targetPath}/.templates {targetPath}/WebGLTemplate\"";
+            process.StartInfo.Arguments = $"-c \"mv {targetPath}/.templates {targetPath}/WebGLTemplates\"";
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
 
             Debug.Log("Renaming symlink");
             process.Start();
+
+            // Reimport the assets
+            AssetDatabase.Refresh();
         }
     }
 }
