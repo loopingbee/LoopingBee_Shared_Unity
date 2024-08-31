@@ -7,7 +7,19 @@ namespace LoopingBee.Shared
     public class LoopingBeeInput : MonoBehaviour
     {
         static LoopingBeeInput _instance;
-        public static LoopingBeeInput Instance => _instance;
+        public static LoopingBeeInput Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    var prefab = Resources.Load<LoopingBeeInput>("LoopingBeeInput");
+                    _instance = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+                }
+
+                return _instance;
+            }
+        }
 
         public event Action<string> OnDataReceived;
 
