@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +23,9 @@ namespace LoopingBee.Shared
         }
 
         public event Action<string> OnDataReceived;
+
+        [DllImport("__Internal")]
+        private static extern void gameOver();
 
         string data;
 
@@ -61,5 +65,10 @@ namespace LoopingBee.Shared
         public bool HasGameData() => !string.IsNullOrEmpty(data);
 
         public T GetGameData<T>() => JsonUtility.FromJson<T>(data);
+
+        public void GameOver()
+        {
+            gameOver();
+        }
     }
 }
