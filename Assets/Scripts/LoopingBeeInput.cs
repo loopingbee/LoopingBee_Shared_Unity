@@ -25,7 +25,7 @@ namespace LoopingBee.Shared
         public event Action<string> OnDataReceived;
 
         [DllImport("__Internal")]
-        private static extern void gameOver();
+        private static extern void gameOver(bool won);
 
         string data;
 
@@ -66,9 +66,9 @@ namespace LoopingBee.Shared
 
         public T GetGameData<T>() => JsonUtility.FromJson<T>(data);
 
-        public void GameOver()
+        public void GameOver(bool won)
         {
-            gameOver();
+            gameOver(won);
         }
     }
 }
