@@ -68,7 +68,9 @@ namespace LoopingBee.Shared
 
         public void GameOver(bool won)
         {
+#if !UNITY_EDITOR
             gameOver(won);
+#endif
         }
     }
 }
