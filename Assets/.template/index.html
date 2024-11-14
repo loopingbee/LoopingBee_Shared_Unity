@@ -59,6 +59,13 @@
           // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
         }).then((unityInstance) => {
           MyGameInstance = unityInstance;
+
+          // Listen for messages from the parent page, used in the CRUD tool
+          window.addEventListener("message", (event) => {
+            if (event.data.method === "setUnityData" && event.data.data)
+              MyGameInstance.SendMessage("LoopingBeeInput", "ReceiveInput", event.data.data);
+          });
+
           console.log("ready");
         });
       }
