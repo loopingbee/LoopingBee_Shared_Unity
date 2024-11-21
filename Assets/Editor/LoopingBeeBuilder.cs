@@ -7,6 +7,7 @@ namespace LoopingBee.Shared
         [MenuItem("LoopingBee/Build WebGL")]
         public static void BuildWebGL()
         {
+            UnityEditor.WebGL.UserBuildSettings.codeOptimization = UnityEditor.WebGL.WasmCodeOptimization.RuntimeSpeedLTO;
             BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, "Builds/WebGL", BuildTarget.WebGL, BuildOptions.None);
         }
     }
