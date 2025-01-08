@@ -66,10 +66,10 @@ namespace LoopingBee.Shared
 
         public T GetGameData<T>() => JsonUtility.FromJson<T>(data);
 
-        public void GameOver(bool won)
+        public void GameOver(bool won, int score)
         {
 #if !UNITY_EDITOR
-            gameOver(won);
+            gameOver(won, score);
 #endif
         }
     }
