@@ -1,9 +1,7 @@
 {
-    "name": "LoopingBee.Shared",
-    "rootNamespace": "LoopingBee.Shared",
-    "references": [
-        "GUID:641edf644e2ba49aaa7202bb10e4e9c9"
-    ],
+    "name": "LoopingBee.Shared.LitJson",
+    "rootNamespace": "LoopingBee.Shared.LitJson",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

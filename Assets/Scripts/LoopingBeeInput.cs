@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using LoopingBee.Shared.LitJson;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -64,7 +65,7 @@ namespace LoopingBee.Shared
 
         public bool HasGameData() => !string.IsNullOrEmpty(data);
 
-        public T GetGameData<T>() => JsonUtility.FromJson<T>(data);
+        public T GetGameData<T>() => JsonMapper.ToObject<T>(data);
 
         public void GameOver(bool won, int score)
         {

@@ -1,0 +1,4 @@
+# Make sure no issues are reported from this folder
+[*]
+generated_code = true
+dotnet_diagnostic.cs3021.severity = none
