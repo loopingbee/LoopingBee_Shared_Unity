@@ -1,10 +1,9 @@
 using System;
+using LoopingBee.Shared.LitJson;
 
 namespace LoopingBee.Shared.Data
 {
-#if !UNITY_EDITOR
     [Serializable]
-#endif
     public class UserData
     {
         public string name;
@@ -18,6 +17,9 @@ namespace LoopingBee.Shared.Data
     [Serializable]
     public class GameData
     {
+#if UNITY_EDITOR
+        [JsonSkipAttribute]
+#endif
         public UserData user;
     }
 }
