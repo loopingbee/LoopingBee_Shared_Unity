@@ -2,7 +2,9 @@ using System;
 
 namespace LoopingBee.Shared.Data
 {
+#if !UNITY_EDITOR
     [Serializable]
+#endif
     public class UserData
     {
         public string name;
