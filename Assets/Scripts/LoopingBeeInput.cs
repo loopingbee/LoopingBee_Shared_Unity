@@ -83,6 +83,9 @@ namespace LoopingBee.Shared
 
         public Sprite GetAvatarSprite(string name)
         {
+            if (string.IsNullOrEmpty(name))
+                return defaultAvatar;
+
             foreach (var sprite in avatarIcons)
             {
                 if (sprite.name == name)

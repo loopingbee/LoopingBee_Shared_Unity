@@ -9,8 +9,8 @@ namespace LoopingBee.Shared
         public abstract void SetAvatarIcon(Sprite sprite);
         public void SetAvatarIconAndBackground(Sprite sprite, string hex)
         {
-            SetAvatarIcon(sprite);
-            SetAvatarBackground(hex);
+            SetAvatarIcon(sprite ?? LoopingBeeInput.Instance.DefaultAvatar);
+            SetAvatarBackground(hex ?? LoopingBeeInput.Instance.DefaultAvatarBackground);
         }
 
         protected virtual void Start()
@@ -20,13 +20,13 @@ namespace LoopingBee.Shared
             if (LoopingBeeInput.Instance.HasGameData())
             {
                 var data = LoopingBeeInput.Instance.GetGameData<GameData>();
-                SetAvatarIconAndBackground(LoopingBeeInput.Instance.GetAvatarSprite(data.user.avatar_icon), data.user.avatar_background_hex);
+                SetAvatarIconAndBackground(LoopingBeeInput.Instance.GetAvatarSprite(data.user?.avatar_icon), data.user?.avatar_background_hex);
             }
 
             LoopingBeeInput.Instance.OnDataReceived += input =>
             {
                 var data = LoopingBeeInput.Instance.GetGameData<GameData>();
-                SetAvatarIconAndBackground(LoopingBeeInput.Instance.GetAvatarSprite(data.user.avatar_icon), data.user.avatar_background_hex);
+                SetAvatarIconAndBackground(LoopingBeeInput.Instance.GetAvatarSprite(data.user?.avatar_icon), data.user?.avatar_background_hex);
             };
         }
     }
