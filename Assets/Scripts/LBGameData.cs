@@ -15,7 +15,7 @@ namespace LoopingBee.Shared.Data
     }
 
     [Serializable]
-    public class GameData
+    public class LBGameData
     {
 #if UNITY_EDITOR
         [JsonSkipAttribute]

@@ -72,7 +72,7 @@ namespace LoopingBee.Shared
 
         public bool HasGameData() => !string.IsNullOrEmpty(data);
 
-        public T GetGameData<T>() where T : GameData => JsonMapper.ToObject<T>(data);
+        public T GetGameData<T>() where T : LBGameData => JsonMapper.ToObject<T>(data);
 
         public void GameOver(bool won, int score)
         {

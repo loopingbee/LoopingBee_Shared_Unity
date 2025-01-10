@@ -19,13 +19,13 @@ namespace LoopingBee.Shared
 
             if (LoopingBeeInput.Instance.HasGameData())
             {
-                var data = LoopingBeeInput.Instance.GetGameData<GameData>();
+                var data = LoopingBeeInput.Instance.GetGameData<LBGameData>();
                 SetAvatarIconAndBackground(LoopingBeeInput.Instance.GetAvatarSprite(data.user?.avatar_icon), data.user?.avatar_background_hex);
             }
 
             LoopingBeeInput.Instance.OnDataReceived += input =>
             {
-                var data = LoopingBeeInput.Instance.GetGameData<GameData>();
+                var data = LoopingBeeInput.Instance.GetGameData<LBGameData>();
                 SetAvatarIconAndBackground(LoopingBeeInput.Instance.GetAvatarSprite(data.user?.avatar_icon), data.user?.avatar_background_hex);
             };
         }
