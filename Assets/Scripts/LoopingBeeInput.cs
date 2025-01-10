@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using LoopingBee.Shared.LitJson;
+using LoopingBee.Shared.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,27 +29,33 @@ namespace LoopingBee.Shared
         [DllImport("__Internal")]
         private static extern void gameOver(bool won, int score);
 
+        [SerializeField] Sprite[] avatarIcons;
+        [SerializeField] Sprite defaultAvatar;
+
         string data;
+
+        internal Sprite DefaultAvatar => defaultAvatar;
+        internal string DefaultAvatarBackground => "#95A5A6";
 
         void Awake()
         {
+            Application.targetFrameRate = 60;
+
             if (_instance == null)
             {
                 _instance = this;
                 DontDestroyOnLoad(gameObject);
             }
             else
-            {
                 Destroy(gameObject);
-            }
         }
 
         void Start()
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
-        WebGLInput.captureAllKeyboardInput = false;
-        Cursor.lockState = CursorLockMode.None;
-        WebGLInput.stickyCursorLock = false;
+            WebGLInput.captureAllKeyboardInput = false;
+            Cursor.lockState = CursorLockMode.None;
+            WebGLInput.stickyCursorLock = false;
 #endif
             SceneManager.LoadScene(1);
         }
@@ -65,13 +72,24 @@ namespace LoopingBee.Shared
 
         public bool HasGameData() => !string.IsNullOrEmpty(data);
 
-        public T GetGameData<T>() => JsonMapper.ToObject<T>(data);
+        public T GetGameData<T>() where T : GameData => JsonMapper.ToObject<T>(data);
 
         public void GameOver(bool won, int score)
         {
 #if !UNITY_EDITOR
             gameOver(won, score);
 #endif
+        }
+
+        public Sprite GetAvatarSprite(string name)
+        {
+            foreach (var sprite in avatarIcons)
+            {
+                if (sprite.name == name)
+                    return sprite;
+            }
+
+            return defaultAvatar;
         }
     }
 }
