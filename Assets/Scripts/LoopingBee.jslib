@@ -1,6 +1,5 @@
 mergeInto(LibraryManager.library, {
     gameOver: function (result, score) {
-        console.log(`Game Over`);
-        console.log(`Result: ${result}, score: ${score}`);
+        console.log(`Game Over: {"result": "${result}", "score": "${score}"}`);
     }
 });
