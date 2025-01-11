@@ -74,10 +74,10 @@ namespace LoopingBee.Shared
 
         public T GetGameData<T>() where T : LBGameData => JsonMapper.ToObject<T>(data);
 
-        public void GameOver(bool won, int score)
+        public void GameOver(bool won, int score, float showcaseDelay = 0)
         {
 #if !UNITY_EDITOR
-            gameOver(won, score);
+            gameOver(won, score, showcaseDelay);
 #endif
         }
 
