@@ -8,40 +8,34 @@ This library serves as a bridge between the JavaScript engine of the host app an
     - Click on the `+` button and select `Add package from git URL...`.
     - Enter the URL of the library's repository and click `Add`.
 
-2. **Setup the player settings**: Go to Project Settings > Player > Web settings > Resolution and Presentation.
-    - Set `Default Canvas Width` to `960`
-    - Set `Default Canvas Height` to `600`
-    - Set `Run in Background` to `false`
-    - Select `Looping Bee` as the WebGL Template
-
-3. **Include the Namespace**: In your C# scripts, include the namespace of the library.
+2. **Include the Namespace**: In your C# scripts, include the namespace of the library.
     ```csharp
     using LoopingBee.Shared;
     ```
 
-4. **Receive Input Data**: The JavaScript engine will call the `ReceiveInput` method with the JSON representation of the level data.
+3. **Receive Input Data**: The JavaScript engine will call the `ReceiveInput` method with the JSON representation of the level data.
     ```csharp
     LoopingBeeInput.Instance.ReceiveInput("your input data");
     ```
 
-5. **Subscribe to Events**: Subscribe to the `OnDataReceived` event to handle received data.
+4. **Subscribe to Events**: Subscribe to the `OnDataReceived` event to handle received data.
     ```csharp
     LoopingBeeInput.Instance.OnDataReceived += (data) => {
         Debug.Log("Data received: " + data);
     };
     ```
 
-6. **Check for Game Data**: Use the `HasGameData` method to check if there is any game data.
+5. **Check for Game Data**: Use the `HasGameData` method to check if there is any game data.
     ```csharp
     bool hasData = LoopingBeeInput.Instance.HasGameData();
     ```
 
-7. **Retrieve Game Data**: Use the `GetGameData` method to retrieve the game data.
+6. **Retrieve Game Data**: Use the `GetGameData` method to retrieve the game data.
     ```csharp
     var gameData = LoopingBeeInput.Instance.GetGameData<GameData>();
     ```
 
-8. **Handle Game Over**: Use the `GameOver` method to signal the end of the game.
+7. **Handle Game Over**: Use the `GameOver` method to signal the end of the game.
     ```csharp
     LoopingBeeInput.Instance.GameOver(result, score);
     ```
