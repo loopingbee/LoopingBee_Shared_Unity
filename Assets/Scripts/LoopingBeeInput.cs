@@ -27,7 +27,7 @@ namespace LoopingBee.Shared
         public event Action<string> OnDataReceived;
 
         [DllImport("__Internal")]
-        private static extern void gameOver(bool won, int score);
+        private static extern void gameOver(bool won, int score, float showcaseDelay);
 
         [SerializeField] Sprite[] avatarIcons;
         [SerializeField] Sprite defaultAvatar;
