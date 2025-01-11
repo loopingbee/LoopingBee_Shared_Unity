@@ -12,7 +12,7 @@ namespace LoopingBee.Shared
             PlayerSettings.runInBackground = false;
             PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Brotli;
             PlayerSettings.SplashScreen.show = false;
-            PlayerSettings.WebGL.template = "Assets/WebGLTemplates/Looping Bee";
+            PlayerSettings.WebGL.template = "PROJECT:Looping Bee";
             QualitySettings.SetQualityLevel(1, true);
         }
 
