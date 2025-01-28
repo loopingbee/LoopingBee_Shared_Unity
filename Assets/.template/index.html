@@ -32,8 +32,8 @@
         }
       };
     </script>
-    <script src="Build/{{{ LOADER_FILENAME }}}" onload="window.ReactNativeWebView.postMessage('loader script loaded')"
-      onerror="window.ReactNativeWebView.postMessage('loader script failed to load '  + this.src+ ', error: ' + JSON.stringify(event))"></script>
+    <script src="Build/{{{ LOADER_FILENAME }}}" onload="if (window.ReactNativeWebView) { window.ReactNativeWebView.postMessage('loader script loaded') }"
+      onerror="if (window.ReactNativeWebView) { window.ReactNativeWebView.postMessage('loader script failed to load '  + this.src+ ', error: ' + JSON.stringify(event)) }"></script>
     <script>
       var MyGameInstance = null;
 
