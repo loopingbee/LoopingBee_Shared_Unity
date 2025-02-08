@@ -7,5 +7,17 @@ mergeInto(LibraryManager.library, {
         });
 
         console.log(`Game Over: ${message}`);
+    },
+    purchaseProduct: function (product_id, uuid)
+    {
+        const message = JSON.stringify({
+            action: "purchase",
+            data: {
+                product_id,
+                uuid
+            }
+        })
+
+        console.log(`Action: ${message}`);
     }
 });
