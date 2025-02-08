@@ -125,6 +125,12 @@ namespace LoopingBee.Shared
 #endif
         }
 
+        internal void ResolvePurchase(string json)
+        {
+            var data = JsonMapper.ToObject(json);
+            ResolvePurchase(data["product_id"].ToString(), data["uuid"].ToString(), (int)data["result"]);
+        }
+
         internal void ResolvePurchase(string product_id, string uuid, int result)
         {
             purchaseCallbacks[uuid]?.Invoke(product_id, uuid, (LBPurchaseResult)result);
