@@ -28,13 +28,7 @@ namespace LoopingBee.Shared
         public delegate void OnDataReceivedDelegate(string data);
         public event OnDataReceivedDelegate OnDataReceived;
 
-        public enum PurchaseResult
-        {
-            Success,
-            Failure
-        }
-
-        public delegate void OnPurchaseResultDelegate(string product_id, string uuid, PurchaseResult result);
+        public delegate void OnPurchaseResultDelegate(string product_id, string uuid, LBPurchaseResult result);
 
         [DllImport("__Internal")]
         private static extern void gameOver(bool won, int score, float showcaseDelay);
@@ -116,7 +110,7 @@ namespace LoopingBee.Shared
             var gameData = GetGameData<LBGameData>();
             if (!gameData.products.ContainsKey(product_id))
             {
-                onPurchaseResult?.Invoke(product_id, null, PurchaseResult.Failure);
+                onPurchaseResult?.Invoke(product_id, null, LBPurchaseResult.Failure);
                 return;
             }
 
@@ -126,13 +120,13 @@ namespace LoopingBee.Shared
 #if !UNITY_EDITOR
             purchaseProduct(product_id, uuid);
 #else
-            ResolvePurchase(product_id, uuid, (int)PurchaseResult.Success);
+            ResolvePurchase(product_id, uuid, (int)LBPurchaseResult.Success);
 #endif
         }
 
         internal void ResolvePurchase(string product_id, string uuid, int result)
         {
-            purchaseCallbacks[uuid]?.Invoke(product_id, uuid, (PurchaseResult)result);
+            purchaseCallbacks[uuid]?.Invoke(product_id, uuid, (LBPurchaseResult)result);
             purchaseCallbacks.Remove(uuid);
         }
     }
