@@ -74,14 +74,16 @@ namespace LoopingBee.Shared
             SceneManager.LoadScene(1);
         }
 
-        public void ReceiveInput(string input)
+        public void ReceiveInput(string input, bool reloadScene = true)
         {
             data = input;
 
             Debug.Log("Received data: " + data);
 
             OnDataReceived?.Invoke(data);
-            SceneManager.LoadScene(1);
+
+            if (reloadScene)
+                SceneManager.LoadScene(1);
         }
 
         public bool HasGameData() => !string.IsNullOrEmpty(data);
