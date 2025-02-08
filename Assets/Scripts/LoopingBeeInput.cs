@@ -74,7 +74,7 @@ namespace LoopingBee.Shared
             SceneManager.LoadScene(1);
         }
 
-        internal void ReceiveInput(string input)
+        public void ReceiveInput(string input)
         {
             data = input;
 
