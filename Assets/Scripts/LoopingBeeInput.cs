@@ -121,17 +121,17 @@ namespace LoopingBee.Shared
 #if !UNITY_EDITOR
             purchaseProduct(product_id, uuid);
 #else
-            ResolvePurchase(product_id, uuid, (int)LBPurchaseResult.Success);
+            ResolvePurchaseInternal(product_id, uuid, (int)LBPurchaseResult.Success);
 #endif
         }
 
         internal void ResolvePurchase(string json)
         {
             var data = JsonMapper.ToObject(json);
-            ResolvePurchase(data["product_id"].ToString(), data["uuid"].ToString(), (int)data["result"]);
+            ResolvePurchaseInternal(data["product_id"].ToString(), data["uuid"].ToString(), (int)data["result"]);
         }
 
-        internal void ResolvePurchase(string product_id, string uuid, int result)
+        void ResolvePurchaseInternal(string product_id, string uuid, int result)
         {
             purchaseCallbacks[uuid]?.Invoke(product_id, uuid, (LBPurchaseResult)result);
             purchaseCallbacks.Remove(uuid);
