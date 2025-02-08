@@ -68,6 +68,7 @@ namespace LoopingBee.Shared
             SceneManager.LoadScene(1);
         }
 
+        public void ReceiveInput(string input) => ReceiveInput(input, true);
         public void ReceiveInput(string input, bool reloadScene = true)
         {
             data = input;
