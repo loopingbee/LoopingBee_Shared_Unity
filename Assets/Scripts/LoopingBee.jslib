@@ -13,8 +13,8 @@ mergeInto(LibraryManager.library, {
         const message = JSON.stringify({
             action: "purchase",
             data: {
-                product_id,
-                uuid
+                product_id: UTF8ToString(product_id),
+                uuid: UTF8ToString(uuid)
             }
         })
 
