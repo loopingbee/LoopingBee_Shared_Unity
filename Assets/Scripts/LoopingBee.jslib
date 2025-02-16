@@ -1,9 +1,10 @@
 mergeInto(LibraryManager.library, {
-    gameOver: function (result, score, showcaseDelay) {
+    gameOver: function (result, score, allowContinue, showcaseDelay) {
         const message = JSON.stringify({
             result: result == 1,
             score,
-            showcaseDelay
+            showcaseDelay,
+            allowContinue: allowContinue == 1
         });
 
         console.log(`Game Over: ${message}`);

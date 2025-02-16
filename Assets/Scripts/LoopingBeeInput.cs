@@ -28,10 +28,13 @@ namespace LoopingBee.Shared
         public delegate void OnDataReceivedDelegate(string data);
         public event OnDataReceivedDelegate OnDataReceived;
 
+        public delegate void OnContinueDelegate();
+        public event OnContinueDelegate OnContinue;
+
         public delegate void OnPurchaseResultDelegate(string product_id, string uuid, LBPurchaseResult result);
 
         [DllImport("__Internal")]
-        private static extern void gameOver(bool won, int score, float showcaseDelay);
+        private static extern void gameOver(bool won, int score, bool allowContinue, float showcaseDelay);
 
         [DllImport("__Internal")]
         private static extern void purchaseProduct(string product_id, string uuid);
@@ -85,10 +88,10 @@ namespace LoopingBee.Shared
 
         public T GetGameData<T>() where T : LBGameData => JsonMapper.ToObject<T>(data);
 
-        public void GameOver(bool won, int score, float showcaseDelay = 0)
+        public void GameOver(bool won, int score, bool allowContinue, float showcaseDelay = 0)
         {
 #if !UNITY_EDITOR
-            gameOver(won, score, showcaseDelay);
+            gameOver(won, score, allowContinue, showcaseDelay);
 #endif
         }
 
@@ -135,6 +138,11 @@ namespace LoopingBee.Shared
         {
             purchaseCallbacks[uuid]?.Invoke(product_id, uuid, (LBPurchaseResult)result);
             purchaseCallbacks.Remove(uuid);
+        }
+
+        internal void UseContinue()
+        {
+            OnContinue?.Invoke();
         }
     }
 }
