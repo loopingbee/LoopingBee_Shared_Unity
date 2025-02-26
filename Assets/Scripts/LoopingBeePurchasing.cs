@@ -47,7 +47,7 @@ namespace LoopingBee.Shared
         public void PurchaseProduct(string product_id, OnPurchaseResultDelegate onPurchaseResult)
         {
 #if !UNITY_EDITOR
-            var gameData = GetGameData<LBGameData>();
+            var gameData = LoopingBeeInput.Instance.GetGameData<LBGameData>();
 
             if (!gameData.products.ContainsKey(product_id))
             {
