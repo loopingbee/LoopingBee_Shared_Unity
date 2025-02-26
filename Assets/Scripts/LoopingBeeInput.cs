@@ -1,10 +1,8 @@
-using System;
 using System.Runtime.InteropServices;
 using LoopingBee.Shared.LitJson;
 using LoopingBee.Shared.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 
 namespace LoopingBee.Shared
 {
@@ -31,19 +29,13 @@ namespace LoopingBee.Shared
         public delegate void OnContinueDelegate();
         public event OnContinueDelegate OnContinue;
 
-        public delegate void OnPurchaseResultDelegate(string product_id, string uuid, LBPurchaseResult result);
-
         [DllImport("__Internal")]
         private static extern void gameOver(bool won, int score, bool allowContinue, float showcaseDelay);
-
-        [DllImport("__Internal")]
-        private static extern void purchaseProduct(string product_id, string uuid);
 
         [SerializeField] Sprite[] avatarIcons;
         [SerializeField] Sprite defaultAvatar;
 
         string data;
-        readonly Dictionary<string, OnPurchaseResultDelegate> purchaseCallbacks = new();
 
         internal Sprite DefaultAvatar => defaultAvatar;
         internal string DefaultAvatarBackground => "#95A5A6";
@@ -107,40 +99,6 @@ namespace LoopingBee.Shared
             }
 
             return defaultAvatar;
-        }
-
-        public void PurchaseProduct(string product_id, OnPurchaseResultDelegate onPurchaseResult)
-        {
-            var gameData = GetGameData<LBGameData>();
-
-#if !UNITY_EDITOR
-            if (!gameData.products.ContainsKey(product_id))
-            {
-                onPurchaseResult?.Invoke(product_id, null, LBPurchaseResult.Failure);
-                return;
-            }
-#endif
-
-            var uuid = Guid.NewGuid().ToString();
-            purchaseCallbacks.Add(uuid, onPurchaseResult);
-
-#if !UNITY_EDITOR
-            purchaseProduct(product_id, uuid);
-#else
-            ResolvePurchaseInternal(product_id, uuid, (int)LBPurchaseResult.Success);
-#endif
-        }
-
-        internal void ResolvePurchase(string json)
-        {
-            var data = JsonMapper.ToObject(json);
-            ResolvePurchaseInternal(data["product_id"].ToString(), data["uuid"].ToString(), (int)data["result"]);
-        }
-
-        void ResolvePurchaseInternal(string product_id, string uuid, int result)
-        {
-            purchaseCallbacks[uuid]?.Invoke(product_id, uuid, (LBPurchaseResult)result);
-            purchaseCallbacks.Remove(uuid);
         }
 
         internal void UseContinue()
