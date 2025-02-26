@@ -112,11 +112,14 @@ namespace LoopingBee.Shared
         public void PurchaseProduct(string product_id, OnPurchaseResultDelegate onPurchaseResult)
         {
             var gameData = GetGameData<LBGameData>();
+
+#if !UNITY_EDITOR
             if (!gameData.products.ContainsKey(product_id))
             {
                 onPurchaseResult?.Invoke(product_id, null, LBPurchaseResult.Failure);
                 return;
             }
+#endif
 
             var uuid = Guid.NewGuid().ToString();
             purchaseCallbacks.Add(uuid, onPurchaseResult);
