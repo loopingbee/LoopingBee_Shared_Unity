@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Codice.Client.Common.GameUI.Checkin;
 using LoopingBee.Shared.LitJson;
 
 namespace LoopingBee.Shared.Data
@@ -38,5 +39,18 @@ namespace LoopingBee.Shared.Data
         public UserData user;
         public LevelData level;
         public Dictionary<string, ProductData> products;
+    }
+
+    [Serializable]
+    public class LBLevelData<T> where T : LBGameData
+    {
+        [Serializable]
+        public class SnPMetadata
+        {
+            public int difficulty;
+        }
+
+        public SnPMetadata _snp_metadata;
+        public T content;
     }
 }
