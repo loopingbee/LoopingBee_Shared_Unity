@@ -7,7 +7,7 @@ mergeInto(LibraryManager.library, {
             allowContinue: allowContinue == 1
         });
 
-        console.log(`Game Over: ${message}`);
+        console.log(`[S&P SDK] Game Over: ${message}`);
     },
     purchaseProduct: function (product_id, uuid)
     {
@@ -19,6 +19,9 @@ mergeInto(LibraryManager.library, {
             }
         })
 
-        console.log(`Action: ${message}`);
+        console.log(`[S&P SDK] Action: ${message}`);
+    },
+    gameStarted: function () {
+        console.log(`[S&P SDK] Game Started`);
     }
 });

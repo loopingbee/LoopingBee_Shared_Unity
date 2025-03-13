@@ -9,9 +9,6 @@ namespace LoopingBee.Shared.Data
     {
         public string name;
 
-        public string avatar_icon;
-        public string avatar_background_hex;
-
         public int highScore;
     }
 

@@ -32,13 +32,10 @@ namespace LoopingBee.Shared
         [DllImport("__Internal")]
         private static extern void gameOver(bool won, int score, bool allowContinue, float showcaseDelay);
 
-        [SerializeField] Sprite[] avatarIcons;
-        [SerializeField] Sprite defaultAvatar;
+        [DllImport("__Internal")]
+        private static extern void gameStarted();
 
         string data;
-
-        internal Sprite DefaultAvatar => defaultAvatar;
-        internal string DefaultAvatarBackground => "#95A5A6";
 
         void Awake()
         {
@@ -72,6 +69,10 @@ namespace LoopingBee.Shared
 
             OnDataReceived?.Invoke(data);
 
+#if !UNITY_EDITOR
+            gameStarted();
+#endif
+
             if (reloadScene)
                 SceneManager.LoadScene(1);
         }
@@ -85,20 +86,6 @@ namespace LoopingBee.Shared
 #if !UNITY_EDITOR
             gameOver(won, score, allowContinue, showcaseDelay);
 #endif
-        }
-
-        public Sprite GetAvatarSprite(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-                return defaultAvatar;
-
-            foreach (var sprite in avatarIcons)
-            {
-                if (sprite.name == name)
-                    return sprite;
-            }
-
-            return defaultAvatar;
         }
 
         internal void UseContinue()
