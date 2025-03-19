@@ -9,9 +9,6 @@ namespace LoopingBee.Shared.Data
     {
         public string name;
 
-        public string avatar_icon;
-        public string avatar_background_hex;
-
         public int highScore;
     }
 
@@ -25,7 +22,7 @@ namespace LoopingBee.Shared.Data
     [Serializable]
     public class ProductData
     {
-        public string id;
+        public string product_id;
         public int coins;
     }
 
