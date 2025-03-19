@@ -7,6 +7,8 @@ mergeInto(LibraryManager.library, {
             allowContinue: allowContinue == 1
         });
 
+        // For backwards compatibility with App 0.8.X
+        console.log(`Game Over: ${message}`);
         console.log(`[S&P SDK] Game Over: ${message}`);
     },
     purchaseProduct: function (product_id, uuid)
@@ -19,6 +21,8 @@ mergeInto(LibraryManager.library, {
             }
         })
 
+        // For backwards compatibility with App 0.8.X
+        console.log(`Action: ${message}`);
         console.log(`[S&P SDK] Action: ${message}`);
     },
     gameStarted: function () {
