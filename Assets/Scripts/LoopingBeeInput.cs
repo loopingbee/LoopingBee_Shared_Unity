@@ -114,8 +114,5 @@ namespace LoopingBee.Shared
         {
             OnContinue?.Invoke();
         }
-
-        // For backwards compatibility with App 0.8.X
-        internal void ResolvePurchase(string json) => LoopingBeePurchasing.Instance.ResolvePurchase(json);
     }
 }
