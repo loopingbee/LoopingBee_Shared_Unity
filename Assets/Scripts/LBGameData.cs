@@ -15,6 +15,9 @@ namespace LoopingBee.Shared.Data
     [Serializable]
     public class LevelData
     {
+#if UNITY_EDITOR
+        [JsonSkipAttribute]
+#endif
         public int id;
         public int difficulty;
     }
@@ -35,6 +38,9 @@ namespace LoopingBee.Shared.Data
 #endif
         public UserData user;
         public LevelData level;
+#if UNITY_EDITOR
+        [JsonSkipAttribute]
+#endif
         public Dictionary<string, ProductData> products;
     }
 }
