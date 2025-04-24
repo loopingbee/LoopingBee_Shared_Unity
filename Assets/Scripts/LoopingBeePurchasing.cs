@@ -75,12 +75,19 @@ namespace LoopingBee.Shared
         {
             try
             {
-                purchaseCallbacks[uuid]?.Invoke(product_id, uuid, (LBPurchaseResult)result);
-                purchaseCallbacks.Remove(uuid);
+                purchaseCallbacks[uuid].Invoke(product_id, uuid, (LBPurchaseResult)result);
             }
             catch (KeyNotFoundException e)
             {
                 Debug.LogError($"Key not found: {uuid}, available UUIDs: {string.Join(",", purchaseCallbacks.Keys)}. Exception: {e.Message}");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error resolving purchase: {e.Message}");
+            }
+            finally
+            {
+                purchaseCallbacks.Remove(uuid);
             }
         }
     }
