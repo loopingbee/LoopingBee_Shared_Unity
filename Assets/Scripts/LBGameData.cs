@@ -24,6 +24,7 @@ namespace LoopingBee.Shared.Data
     {
         public string product_id;
         public int coins;
+        public bool rewardedAd;
     }
 
     [Serializable]
