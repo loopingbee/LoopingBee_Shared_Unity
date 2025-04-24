@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using LoopingBee.Shared.LitJson;
 using LoopingBee.Shared.Data;
+using LoopingBee.Shared.Data.Internal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -79,7 +80,24 @@ namespace LoopingBee.Shared
 
         public bool HasGameData() => !string.IsNullOrEmpty(data);
 
-        public T GetGameData<T>() where T : LBGameData => JsonMapper.ToObject<T>(data);
+        public T GetGameData<T>() where T : LBGameData
+        {
+            var parsedData = JsonMapper.ToObject<T>(data);
+
+#if UNITY_EDITOR
+            var metadataPath = Application.dataPath + "/../metadata.json";
+            if (System.IO.File.Exists(metadataPath))
+            {
+                var metadata = System.IO.File.ReadAllText(metadataPath);
+                var metadataParsed = JsonMapper.ToObject<GameMetadata>(metadata);
+
+                if (parsedData.products == null)
+                    parsedData.products = metadataParsed.products;
+            }
+#endif
+
+            return parsedData;
+        }
 
         public void GameOver(bool won, int score, bool allowContinue, float showcaseDelay = 0)
         {
