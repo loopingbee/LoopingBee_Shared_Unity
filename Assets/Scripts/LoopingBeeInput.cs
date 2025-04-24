@@ -92,7 +92,11 @@ namespace LoopingBee.Shared
                 var metadataParsed = JsonMapper.ToObject<GameMetadata>(metadata);
 
                 if (parsedData.products == null)
+                {
                     parsedData.products = metadataParsed.products;
+                    foreach (var kvp in parsedData.products)
+                        kvp.Value.product_id = kvp.Key;
+                }
             }
 #endif
 
