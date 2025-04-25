@@ -57,6 +57,8 @@ namespace LoopingBee.Shared.Data
             rectTransform.anchorMax = anchorMax;
             rectTransform.sizeDelta = Vector2.zero;
             rectTransform.anchoredPosition = Vector2.zero;
+
+            rectTransform.ForceUpdateRectTransforms();
         }
 
 #if UNITY_EDITOR
