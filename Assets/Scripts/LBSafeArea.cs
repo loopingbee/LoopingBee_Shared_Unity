@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,7 +59,9 @@ namespace LoopingBee.Shared.Data
             rectTransform.sizeDelta = Vector2.zero;
             rectTransform.anchoredPosition = Vector2.zero;
 
-            LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
+            var children = rectTransform.GetComponentsInChildren<RectTransform>(true);
+            foreach (var child in children)
+                LayoutRebuilder.MarkLayoutForRebuild(child);
         }
 
 #if UNITY_EDITOR
