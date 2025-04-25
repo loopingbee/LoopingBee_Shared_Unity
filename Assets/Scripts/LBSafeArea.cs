@@ -59,9 +59,19 @@ namespace LoopingBee.Shared.Data
             rectTransform.sizeDelta = Vector2.zero;
             rectTransform.anchoredPosition = Vector2.zero;
 
-            var children = rectTransform.GetComponentsInChildren<RectTransform>(true);
-            foreach (var child in children)
-                LayoutRebuilder.MarkLayoutForRebuild(child);
+            StartCoroutine(DelayedLayoutRebuild(rectTransform));
+
+            IEnumerator DelayedLayoutRebuild(RectTransform rectTransform)
+            {
+                yield return null;
+
+                var children = rectTransform.GetComponentsInChildren<RectTransform>(true);
+                foreach (var child in children)
+                {
+                    LayoutRebuilder.MarkLayoutForRebuild(child);
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(child);
+                }
+            }
         }
 
 #if UNITY_EDITOR
