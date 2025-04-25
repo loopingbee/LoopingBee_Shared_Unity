@@ -30,6 +30,11 @@ namespace LoopingBee.Shared
         public delegate void OnContinueDelegate();
         public event OnContinueDelegate OnContinue;
 
+        public delegate void OnSafeAreaChangedDelegate(LBSafeAreaData data);
+        public event OnSafeAreaChangedDelegate OnSafeAreaChanged;
+
+        public LBSafeAreaData SafeAreaData { get; private set; }
+
         [DllImport("__Internal")]
         private static extern void gameOver(bool won, int score, bool allowContinue, float showcaseDelay);
 
@@ -113,6 +118,17 @@ namespace LoopingBee.Shared
         internal void UseContinue()
         {
             OnContinue?.Invoke();
+        }
+
+        public void UpdateSafeArea(string json)
+        {
+            var safeArea = JsonMapper.ToObject<LBSafeAreaData>(json);
+            if (SafeAreaData == null || SafeAreaData.top != safeArea.top || SafeAreaData.bottom != safeArea.bottom ||
+                SafeAreaData.left != safeArea.left || SafeAreaData.right != safeArea.right)
+            {
+                SafeAreaData = safeArea;
+                OnSafeAreaChanged?.Invoke(safeArea);
+            }
         }
     }
 }
