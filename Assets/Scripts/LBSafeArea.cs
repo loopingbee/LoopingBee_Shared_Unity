@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LoopingBee.Shared.Data
 {
@@ -58,7 +59,7 @@ namespace LoopingBee.Shared.Data
             rectTransform.sizeDelta = Vector2.zero;
             rectTransform.anchoredPosition = Vector2.zero;
 
-            rectTransform.ForceUpdateRectTransforms();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
         }
 
 #if UNITY_EDITOR
