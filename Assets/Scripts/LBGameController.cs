@@ -9,8 +9,6 @@ namespace LoopingBee.Shared
 {
     public abstract class LBGameController<T> : MonoBehaviour where T : LBGameData
     {
-        public static LBGameController<T> Instance { get; private set; }
-
 #if UNITY_EDITOR
         [SerializeField] string testData;
 #endif
@@ -25,11 +23,6 @@ namespace LoopingBee.Shared
         protected virtual void Awake()
         {
             Application.targetFrameRate = 60;
-
-            if (Instance == null)
-                Instance = this;
-            else
-                Destroy(gameObject);
         }
 
         protected virtual void Start()
