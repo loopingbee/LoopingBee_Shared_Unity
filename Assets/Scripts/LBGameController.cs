@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace LoopingBee.Shared
 {
-    public abstract class GameController<T> : MonoBehaviour where T : LBGameData
+    public abstract class LBGameController<T> : MonoBehaviour where T : LBGameData
     {
-        public static GameController<T> Instance { get; private set; }
+        public static LBGameController<T> Instance { get; private set; }
 
 #if UNITY_EDITOR
         [SerializeField] string testData;
