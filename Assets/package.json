@@ -1,6 +1,6 @@
 {
     "name": "com.loopingbee.shared",
-    "version": "0.5.3",
+    "version": "0.5.4",
     "author": "José Luis García",
     "displayName": "Internal Shared Library",
     "description": "A shared code library for the platform",
