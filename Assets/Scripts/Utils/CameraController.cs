@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 
 using UnityEngine;
@@ -24,12 +25,12 @@ namespace LoopingBee.Shared.Utils
                 encapsulateBoundsRoutine = StartCoroutine(EncapsulateBounsdRoutine(bounds.Value));
         }
 
-        public void EncapsulateBounds(Bounds bounds)
+        public void EncapsulateBounds(Bounds bounds, Action onComplete = null)
         {
-            encapsulateBoundsRoutine = StartCoroutine(EncapsulateBounsdRoutine(bounds));
+            encapsulateBoundsRoutine = StartCoroutine(EncapsulateBounsdRoutine(bounds, onComplete));
         }
 
-        IEnumerator EncapsulateBounsdRoutine(Bounds bounds)
+        IEnumerator EncapsulateBounsdRoutine(Bounds bounds, Action onComplete = null)
         {
             var boundsWidth = bounds.size.x;
             var boundsHeight = bounds.size.y;
@@ -66,6 +67,8 @@ namespace LoopingBee.Shared.Utils
 
             this.bounds = bounds;
             encapsulateBoundsRoutine = null;
+
+            onComplete?.Invoke();
         }
     }
 }
