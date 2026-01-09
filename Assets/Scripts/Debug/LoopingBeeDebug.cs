@@ -16,8 +16,7 @@ namespace LoopingBee.Shared.LBDebug
             debugContainer.gameObject.SetActive(false);
 
 #if !UNITY_EDITOR
-            Destroy(this);
-            return;
+            Destroy(this.gameObject);
 #endif
         }
 
