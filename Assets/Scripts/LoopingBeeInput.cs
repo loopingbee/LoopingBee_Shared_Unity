@@ -9,11 +9,15 @@ namespace LoopingBee.Shared
 {
     public class LoopingBeeInput : MonoBehaviour
     {
+        public static bool IsDestroyed { get; set; }
         static LoopingBeeInput _instance;
         public static LoopingBeeInput Instance
         {
             get
             {
+                if (IsDestroyed)
+                    return null;
+
                 if (_instance == null)
                 {
                     var prefab = Resources.Load<LoopingBeeInput>("LoopingBeeInput");
@@ -54,6 +58,15 @@ namespace LoopingBee.Shared
             }
             else
                 Destroy(gameObject);
+        }
+
+        void OnDestroy()
+        {
+            if (_instance == this)
+            {
+                IsDestroyed = true;
+                _instance = null;
+            }
         }
 
         void Start()

@@ -38,16 +38,22 @@ namespace LoopingBee.Shared.Data
                 left = 0f,
                 right = 0.127226f,
                 top = 0.081107f,
-            });
+            }, true);
 #endif
         }
 
         void OnDestroy()
         {
-            LoopingBeeInput.Instance.OnSafeAreaChanged -= OnSafeAreaChanged;
+            if (LoopingBeeInput.Instance != null)
+                LoopingBeeInput.Instance.OnSafeAreaChanged -= OnSafeAreaChanged;
         }
 
         void OnSafeAreaChanged(LBSafeAreaData data)
+        {
+            OnSafeAreaChanged(data, false);
+        }
+
+        void OnSafeAreaChanged(LBSafeAreaData data, bool editorRuntime)
         {
             var rectTransform = GetComponent<RectTransform>();
 
@@ -59,7 +65,9 @@ namespace LoopingBee.Shared.Data
             rectTransform.sizeDelta = Vector2.zero;
             rectTransform.anchoredPosition = Vector2.zero;
 
-            StartCoroutine(DelayedLayoutRebuild(rectTransform));
+            if (!Application.isPlaying || editorRuntime) return;
+
+            LoopingBeeInput.Instance.StartCoroutine(DelayedLayoutRebuild(rectTransform));
 
             IEnumerator DelayedLayoutRebuild(RectTransform rectTransform)
             {
@@ -98,7 +106,7 @@ namespace LoopingBee.Shared.Data
                     left = 0f,
                     right = 0f,
                     top = 0f,
-                });
+                }, true);
             else
                 OnSafeAreaChanged(new()
                 {
@@ -106,7 +114,7 @@ namespace LoopingBee.Shared.Data
                     left = 0f,
                     right = 0.127226f,
                     top = 0.081107f,
-                });
+                }, true);
         }
 #endif
     }
